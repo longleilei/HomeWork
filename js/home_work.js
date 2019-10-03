@@ -33,13 +33,13 @@ console.log(`задание: 5.Получить строку с 5-го симв�
 объяснение: use substr(symbol,number of symbols);`)
 
 str3 = 'congratulations';
-rslt1 = str3.substr(5,[10-5]);
+rslt1 = str3.substr(5,[10-5]); //substring или slice
 console.log(`задание:6.Получить строку с 5-го по 9-й символы;
 результат:${rslt1};  
 объяснение: take 10 because index is always symbol+1;`)
 
 str4 = 'One twin to the other: "You are ugly"'
-let strSl = str4.slice(0, 23);
+let strSl = str4.slice(0, 23); //str4.length-6
 
 console.log(`задание: 7.Получить новую строку из исходной путем удаления последних 6-и символов;
 результат: ${strSl};  
@@ -47,7 +47,7 @@ console.log(`задание: 7.Получить новую строку из и�
 
 let a = 20;
 let b = 16;
-let year = a.toString() + b.toString(); 
+let year = a.toString() + b.toString(); //year = "" + a + b; year = `${a}${b}`; 
 
 console.log(`задание:8. Из двух переменных a=20 и b=16 получить переменную string, в которой будет
 содержаться текст “2016”;
@@ -85,7 +85,7 @@ console.log(`задание: 4. Проверить результат вычис
 объяснение: used toFixed() again;`)
 
 let buck ='100$';
-let buck1 = buck.slice(0,3)
+let buck1 = buck.slice(0,3) // parseInt
 
  
 console.log(`задание: 5. Получить число из строки ‘100$’;
@@ -124,10 +124,10 @@ true + undefined*/
 console.log(`задание: Что отобразится в консоли. Почему?;
 результат:
 1.${'2612'}
-2.${'5-1'} 
-3.${4}
+2.${'5-1'} //!!!! 4
+3.${4} // !!!! 31
 4.${3}
-5.${'do not know'}
+5.${'do not know'} /// !!! 11
 6.${'Nan'};
 7.${5}
 8.${'Nan'}  
@@ -137,7 +137,7 @@ console.log(`задание: Что отобразится в консоли. П
 
 let nice; 
 
-if (nice = "hidden"){
+if (nice = "hidden"){ // проверка ===
 	nice = "visible"}
 else{
 	nice = "hidden"
@@ -151,11 +151,11 @@ console.log(`задание: Если переменная равна “hidden�
 
 let nb = 10; 
 
-if (nb == 0){
-	console.log(nb ==1);
+if (nb == 0){ // проверка должна быть ===
+	console.log(nb ==1); // nb = 1
 	}
 else if(nb < 0){
-	console.log ("nb is less than zero");
+	console.log ("nb is less than zero"); // nb = 'less then zero'
 	}
 else{
 	console.log(nb *=10)
@@ -196,11 +196,11 @@ let item = {
 }
  
 if ('discount' in item && item.discount){
-	priceNum = Number(item.price.slice(0,3))
-	discountNum = Number(item.discount.slice(0,2))
+	priceNum = Number(item.price.slice(0,3))  // !!! parseFloat
+	discountNum = Number(item.discount.slice(0,2)) // !!! parseFloat
 
 	// don't know how to convert 15 to 0.15
-	item.priceWithDiscount = priceNum - (priceNum * discountNum); 
+	item.priceWithDiscount = priceNum - (priceNum * discountNum); // discountNum/100
 	console.log(item.priceWithDiscount);
 }
 
@@ -219,8 +219,8 @@ let product = {
 let minPr = 10; 
 let maxPr = 20; 
 
-priceApp = Number(product.price.slice(0,2))
-	priceApp >= minPr && priceApp < maxPr ? console.log(product.name) : console.log("Tovara net!")
+priceApp = Number(product.price.slice(0,2)) // !!! parseFloat
+	priceApp >= minPr && priceApp < maxPr ? console.log(product.name) : console.log("Tovara net!") // нужно было через if но можно и так
 
 console.log(`задание:5.Написать условие если цена товара больше или равна минимальной цене и меньше или равна максимальной цене то вывести в консоль название этого товара, иначе вывести в консоль что товаров не найдено.;
 результат: 
