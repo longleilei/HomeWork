@@ -39,7 +39,7 @@ console.log(`задание:6.Получить строку с 5-го по 9-й 
 объяснение: take 10 because index is always symbol+1;`)
 
 str4 = 'One twin to the other: "You are ugly"'
-let strSl = str4.slice(0, 23); //str4.length-6
+let strSl = str4.slice(0, str4.length-6); //str4.length-6
 
 console.log(`задание: 7.Получить новую строку из исходной путем удаления последних 6-и символов;
 результат: ${strSl};  
@@ -84,12 +84,12 @@ console.log(`задание: 4. Проверить результат вычис
 результат: ${sum};  
 объяснение: used toFixed() again;`)
 
-let buck ='100$';
-let buck1 = buck.slice(0,3) // parseInt
+let buck ='100843650$';
+let buck1 = buck.slice(0,3) // parseInt parseFloat
 
  
 console.log(`задание: 5. Получить число из строки ‘100$’;
-результат: ${Number(buck1)} ;  
+результат: ${parseInt(buck)} ;  
 объяснение: need to use slice first to get rid of the $ and then convert to Number;`)
 
 
@@ -125,7 +125,7 @@ console.log(`задание: Что отобразится в консоли. П
 результат:
 1.${'2612'}
 2.${'5-1'} //!!!! 4
-3.${4} // !!!! 31
+3.${4} // !!!! "31"
 4.${3}
 5.${'do not know'} /// !!! 11
 6.${'Nan'};
@@ -135,9 +135,9 @@ console.log(`задание: Что отобразится в консоли. П
 
 //If, else 
 
-let nice; 
-
-if (nice = "hidden"){ // проверка ===
+let nice ; 
+nice = "hidden";
+if (nice === "hidden"){ // проверка ===
 	nice = "visible"}
 else{
 	nice = "hidden"
@@ -149,10 +149,11 @@ console.log(`задание: Если переменная равна “hidden�
 результат: ${nice},
 объяснение: `);
 
-let nb = 10; 
+let nb = 0; 
 
-if (nb == 0){ // проверка должна быть ===
-	console.log(nb ==1); // nb = 1
+if (nb === 0){ // проверка должна быть ===
+	console.log(nb ==1);
+	nb = 1
 	}
 else if(nb < 0){
 	console.log ("nb is less than zero"); // nb = 'less then zero'
@@ -196,11 +197,11 @@ let item = {
 }
  
 if ('discount' in item && item.discount){
-	priceNum = Number(item.price.slice(0,3))  // !!! parseFloat
-	discountNum = Number(item.discount.slice(0,2)) // !!! parseFloat
+	priceNum = parseFloat(item.price)  // !!! parseFloat
+	discountNum = parseFloat(item.discount) // !!! parseFloat
 
 	// don't know how to convert 15 to 0.15
-	item.priceWithDiscount = priceNum - (priceNum * discountNum); // discountNum/100
+	item.priceWithDiscount = priceNum - (priceNum * discountNum/100); // discountNum/100
 	console.log(item.priceWithDiscount);
 }
 
