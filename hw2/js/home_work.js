@@ -1,7 +1,6 @@
 
 //OBJECTS  
 
-
 let smartPhone = {
 	product: 'iphone'
 }; 
@@ -17,12 +16,17 @@ console.log(`задание: 2. Добавить в объект поле price,
 
 //****
 // problem - can't add 'model' and 'color', google doesn't help; 
-let smartPhone = {
+/* let smartPhone = {
 	product: 'iphone'
-};  
+};   */
 
-smartPhone.details = "somth"
-smartPhone.details = "smth";
+smartPhone.details = {};
+smartPhone.details.model = 'hhh';
+smartPhone.details.color ='jjkklk';
+
+smartPhone.details = {
+	modelA:'jjk', colorB:"jkjk"
+};
 
 console.log(`задание: 3. Добавить поле details, которое будет содержать объект с полями model и color
 	результат: ${smartPhone}; 
@@ -37,11 +41,11 @@ console.log(`задание: 3. Добавить поле details, которо�
 
 let a = 'inline'; 
 switch(a){
-	case 1: a === "block"
+	case "block": 
 		console.log('block'); break; 
-	case 2: a === "none" 
+	case "none" :  
 		console.log('none'); break; 
-	case 3: a === "inline"
+	case "inline": 
 		console.log('inline'); break; 
 	default: 
 		console.log("other");
@@ -84,8 +88,8 @@ else{
 
 let nice = "hidden"; 
 
-console.log(nice === "hidden" ? nice = "hidden" 
-	: nice = "visible"); 
+console.log(nice === "hidden" ? nice = "visible" 
+	: nice = "hidden"); 
 
 
 // 2
@@ -104,8 +108,8 @@ let product = {
 let minPr = 10; 
 let maxPr = 20; 
 
-priceApp = Number(product.price.slice(0,2))
-	console.log(priceApp >= minPr && priceApp < maxPr ? product.name : "Tovara net!"); 
+priceApp = Number(product.price.slice(0,2)) //!!!!!!
+	console.log((priceApp >= minPr && priceApp < maxPr) ? product.name : "Tovara net!"); 
 
 
 console.log(`задание: Из задач по условному оператору if else выполнить задачи 1, 2 и 3 в виде тернарного оператора.
@@ -120,13 +124,15 @@ console.log(`задание: Из задач по условному опера�
 //LOOPS 
 
 let str = "i am in the easycode"; 
-let newStr = str.split(" "); 
+//let newStr = str.split(" "); 
+let newStr = str[0].toUpperCase();
 
-
-for(let i = 0; i < newStr.length; i++){
-  
-newStr[i][0].toUpperCase() + newStr[i].substring(1);
- 
+for(let i = 1; i < str.length; i++){
+	if(str[i-1] === " "){
+		newStr+=str[i].toUpperCase();
+	} else {
+		newStr+=str[i];
+	}
  }
 
 
@@ -134,34 +140,34 @@ newStr[i][0].toUpperCase() + newStr[i].substring(1);
 
 console.log(`задание: 1. На основе строки “i am in the easycode” сделать новую строку где первые буквы каждого слова 
 будут в верхнем регистре. Использовать for или while. 
-	результат: ${newStr[i][0].toUpperCase() + newStr[i].substring(1)}; 
+	результат: ${newStr}; 
 	объяснение: `)
 
 
 let sent = "tseb eht ma i"; 
 // split + reverse 
-let sent = "tseb eht ma i"; 
-let sentSpl = sent.split(""); 
+//let sent = "tseb eht ma i"; 
+/* let sentSpl = sent.split(""); 
 let rev = sentSpl.reverse(); 
-let fin = rev.join(""); 
+let fin = rev.join("");  */
     
 //Decrementing loop 
 let sent1 = "tseb eht ma i"; 
 let reversed = ""; 
 
 for (let i = sent1.length - 1; i >= 0; i--){
-	reversed =+ sent1[i]; 
+	reversed += sent1[i]; 
 }
 //returns "NaN"
 
 console.log(`задание: Дана строка “tseb eht ma i”. Используя циклы, сделать строку-перевертыш (то есть последняя буква становится первой, предпоследняя - второй итд).
-	результат: ${fin}, ${reversed}; 
+	результат:  ${reversed}; 
 	объяснение: `)
 
 
 // 5! = 5*4*3*2*1 (j * j-1 * j-2)
 
-let fact = 10;
+let fact = 5;
 let factorial = 1; 
 
 for (let j = 0; j < fact; j++){
@@ -174,12 +180,17 @@ console.log(`задание: 3. Факториал числа - произвед
 
 
 let ph = "JavaScript is a pretty good language"; 
-let newPh = ph.split(" ");
+let newPh = ph[0].toUpperCase();
 
 
-for (let i = 0; i <= newPh.length; i++){
-  
-  newPh[i][0].toUpperCase() + newPh[i].substring(1); 
+for (let i = 1; i < ph.length; i++){
+	if(ph[i-1] === " "){
+		newPh += ph[i].toUpperCase();
+	} else if(ph[i] !== ' '){
+		newPh += ph[i];
+	}
+ /*  
+  newPh[i][0].toUpperCase() + newPh[i].substring(1);  */
   
 }
 //How to join it together? .join() doesn't work :( also can't store it in a variable 
@@ -188,7 +199,7 @@ for (let i = 0; i <= newPh.length; i++){
 
 console.log(`задание: На основе строки “На основе строки “JavaScript is a pretty good language” сделать новую строку,
 где каждое слово начинается с большой буквы, а пробелы удалены. Использовать for.
-	результат: ${ newPh[i][0].toUpperCase() + newPh[i].substring(1);}; 
+	результат: ${newPh}; 
 	объяснение: isolate first element and add substring of the rest part of the word`)
 
 
@@ -196,12 +207,9 @@ let Arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 let odd = []; 
 let even = []; 
 
-for (let i of Arr){
-  if ((Arr[i] % 2) != 1){
-    even.push(Arr[i]);
-  }
-  else{
-    odd.push(Arr[i]);
+for (let value of Arr){
+  if ((value%2) === 1){
+    odd.push(value);
   }
 }
 
@@ -215,7 +223,7 @@ console.log(`задание: 5. Найти все нечетные числа в
 	результат: ${odd} ; 
 	объяснение: to find evens use Arr[i]%2 != 1`)
 
-
+   
 let list = {
      name: "denis",
      work: "easycode",
@@ -224,162 +232,19 @@ let list = {
 
 for(let k in list){
 
-  if (list[k] instanceof String){
+  if (typeof list[k] === "string"){
     console.log(list[k]); 
   } else{
     console.log("not a string");
 } 
-
+}
 //detected some weird error 
 
 console.log(`задание: 6. Дан объект, Перебрать объект и если значение в свойстве это строка то переписать ее всю в верхнем регистре. Использовать for in.
 
-	результат:${list[k]} ; 
+	результат:${list} ; 
 	объяснение: instanceof String to check`)
 
 
 
 
-
-
-
-// FUNCTIONS 
-
-
-function multiply(...[a,b,c]){
-
-	return a * b * c; 
-}
-
-console.log(multiply(1,2,3)); 
-console.log(multiply(1,2,3,4)); 
-
-console.log(`задание: Создать функцию multiply, которая будет принимать любое количество чисел и возвращать их произведение: multiply(1,2,3) = 6 (1*2*3)
-	результат: ${multiply(1,2,3)}, ${multiply(1,2,3,4)} ; 
-	объяснение: rest-parameter allows including as many values as you want, but still doesn't work here`)
-
-
-let newW = ""; // need to make the variable global 
-
-function reverseString(word){
-
-  for (let w = word.length-1; w >= 0; w--){
-  	newW = newW + word[w]; 
-    }
-}
-reverseString("test"); 
-reverseString("wonderful"); //why does it concarnate??? 
-
-console.log(newW)
-
-console.log(`задание: Создать функцию, которая принимает строку и возвращает строку-перевертыш: 
-	reverseString(‘test’) // “tset”.
-
-	результат: ${newW} ; 
-	объяснение: use the same method as reverse a string and add arguments`)
-
-
-// also problematic, because returns charCode values separated from each other 
-/*
-let Strr = "ananas"
-let nwStrr = ""; 
-for (let i = 0; i < Strr.length; i++){
-
-  nwStrr = Strr.charCodeAt(i) + ""
-
-		console.log(nwStrr); 
-
-	}
-	output:  
-'97'
-'110'
-'97'
-'110'
-'97'
-'115'
- */
-
-
-let nwStrr = ""; 
-
-function getCodeStringFromText(Strr){
-
-	let nwStrr = ""; 
-
-	for (let i = 0; i < Strr.length; i++){
-
-  	nwStrr = Strr.charCodeAt(i) + ""
-
-		console.log(nwStrr); 
-
-		}
-}
-getCodeStringFromText("hello"); 
-
-console.log(`задание: 3. Создать функцию, которая в качестве аргумента принимает строку 
-	из букв и возвращает строку, где каждый символ разделен пробелом 
-	и заменен на юникод-значение символа: 
-
-getCodeStringFromText(‘hello’) // “104 101 108 108 111” 
-
-подсказка: для получения кода используйте специальный метод 
-	результат: ${nwStrr} ; 
-	объяснение: `)
-
-let num = window.prompt("Enter your number in a range 1 to 10 : ")
-
-if (num > 0 && num <=10){
-	console.log ("Let's see if you guessed...")
-}
-else{
-	console.log("Think again...")
-}
-
-function guessTheNum(num){
-
-
-let num = window.prompt("Enter your number in a range 1 to 10 : ")
-
-
-if (num > 0 && num <=10){
-
-	function guessTheNum(num){
-
-	let rnd = Math.floor(Math.random()*10);
-
-		if (num === rnd){
-			console.log("You guessed!");
-		} else{
-			console.log("Try again!")
-		}
-	}
-}
-else{
-	console.log("Think again...")
-}
-
-console.log(`задание: 4. Создать функцию угадай число. 
-	Она принимает число от 1-10 (обязательно проверить что число не больше 10 и не меньше 0). 
-	Генерирует рандомное число от 1-10 и сравнивает с переданным числом если они совпали 
-	то возвращает “Вы выиграли” если нет то “Вы не угадали ваше число 8 а выпало число 5”. 
-	Числа в строке указаны как пример вы подставляете реальные числа.
-	результат: ; 
-	объяснение: `)
-
-
-
-console.log(`задание: 
-	результат: ; 
-	объяснение: `)
-console.log(`задание: 
-	результат: ; 
-	объяснение: `)
-console.log(`задание: 
-	результат: ; 
-	объяснение: `)
-console.log(`задание: 
-	результат: ; 
-	объяснение: `)
-console.log(`задание: 
-	результат: ; 
-	объяснение: `)
