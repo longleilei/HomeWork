@@ -20,10 +20,7 @@ console.log(`задание: 2. Добавить в объект поле price,
 	product: 'iphone'
 };   */
 
-smartPhone.details = {};
-smartPhone.details.model = 'hhh';
-smartPhone.details.color ='jjkklk';
-
+smartPhone.details = 'smth';
 smartPhone.details = {
 	modelA:'jjk', colorB:"jkjk"
 };
