@@ -1,12 +1,18 @@
-// FUNCTIONS 
+ // FUNCTIONS 
 
 
 function multiply() {
-	
+	/*
 	let i; 
 	let mlt = 1; 
-	for (i = 0; i < arguments.length;i++){
-		mlt += mlt * i;  
+	for (i = 0; i < arguments[i].length;i++){
+		mlt *= arguments[i];  
+	}
+	return mlt;
+*/
+	let mlt = 0; 
+	for (let item of arguments){
+		mlt *= item; 
 	}
 	return mlt; 
 
@@ -23,7 +29,7 @@ console.log(`задание: Создать функцию multiply, котор�
 function reverseString(word) {
 	let newW = "";
 	for (let w = word.length - 1; w >= 0; w--) {
-		newW = newW + word[w];
+		newW += word[w];
 	}
 	return newW;
 }
@@ -44,11 +50,10 @@ let nwStrr = "";
 
 for (let i = 0; i < Strr.length; i++){
 
-  nwStrr = `${Strr.charCodeAt(i)}`;
-
-		console.log(nwStrr); 
+  nwStrr += `${Strr.charCodeAt(i)}`;
 
 	}
+	return nwStrr; 
 }
 let text = getCodeStringFromText("hello");
 console.log(`задание: 3. Создать функцию, которая в качестве аргумента принимает строку 
@@ -61,7 +66,7 @@ getCodeStringFromText(‘hello’) // “104 101 108 108 111”
 	результат: ${text} ; 
 	объяснение: `)
 
-	/* let num = window.prompt("Enter your number in a range 1 to 10 : ")
+/*let num = window.prompt("Enter your number in a range 1 to 10 : ")
 
 if (num > 0 && num <= 10) {
 	console.log("Let's see if you guessed...")
@@ -83,6 +88,7 @@ function guessTheNum() {
 	}
 }
 guessTheNum();
+
 console.log(`задание: 4. Создать функцию угадай число. 
 	Она принимает число от 1-10 (обязательно проверить что число не больше 10 и не меньше 0). 
 	Генерирует рандомное число от 1-10 и сравнивает с переданным числом если они совпали 
@@ -90,6 +96,32 @@ console.log(`задание: 4. Создать функцию угадай чи�
 	Числа в строке указаны как пример вы подставляете реальные числа.
 	результат: ; 
 	объяснение: `)*/
+
+
+
+function guessNum(num){
+	
+	//check the num 
+	if (num >= 0 &&  num <= 10){
+		num = Number(num)//to convert string to num 
+		//create random number
+		let rnd = Math.floor(Math.random() * 10);
+		console.log(rnd); 
+		if (rnd === num){ 
+			return "Guessed!"
+		}else{
+			return `Try again! Your number was ${num}, and random number was ${rnd}`
+		}
+	}
+	else{
+		return "Error"
+	}
+	
+}
+
+/* 
+let game = guessNum(window.prompt("Enter your number in a range 1 to 10 : ")); //prompt returns string 
+alert(game);  */
 
 function getArray(n){
 	let arrayNum = []; 
@@ -107,8 +139,13 @@ let rSlt = getArray(10);
 
 
 function doubleArray(initArr){
-	let innitArr = []; 
-	return initArr + "," + initArr; 
+	let newArr = Array.from(initArr); //copying array
+	//JSON.parse(JSON.stringify(initArr)) copying array 
+	for (let item of initArr){
+		newArr.push(item);
+	}
+	//return initArr.push(initArr); returns length 
+	return newArr; 
 }
 let anS = doubleArray([1,2,3]); 
 
@@ -178,65 +215,54 @@ let fin = funcGetUsers(users,'gender','male');
 	let d = ['abc', '123']//“New value: New value: cba, 321,” ”
 
 	function firstFunction(arr,secondFunction){
-		let newSuperArray = [];
+		let newStr = ''; 
+		//create am empty sting anf push items after they undergo second function, return a new string
 		for (let i = 0; i < arr.length;i++){
-			newSuperArray+=secondFunction(arr[i]); 
+			newStr+=secondFunction(arr[i]); 
 		}
-		return console.log(newSuperArray); 
+		return `New value: ${newStr}`; 
 	}
 	
-	firstFunction(a, function(newSuperArray){
-		let arr = [];
-		arr += newSuperArray[0].toUpperCase() + newSuperArray.slice(1);
-		return arr; 
+	let str1 = firstFunction(a, function(item){
+		
+		item += item[0].toUpperCase() + item.slice(1);
+		return item; 
 	}) 
 
-	firstFunction(b,function(newSuperArray){
-		return newSuperArray * 10 + ','; 
+	let str2 = firstFunction(b,function(item){
+		return item * 10 + ','; 
 	})
 
-	firstFunction(c, function(newSuperArray){
-		c.forEach((element) => {
-			console.log(`${element.name} is ${element.age}`)})
+	let str3 = firstFunction(c, function(item){
+		return `${item.name} is ${item.age},`
 		})
 
-	firstFunction(d,function(newSuperArray){
-		let len = newSuperArray.length;
-		let arr = [];
+		let str4 = firstFunction(d,function(item){
+		let len = item.length;
+		let strRev = ''; 
 		while (len--){
-			arr+=newSuperArray[len]; 
+			strRev+=item[len]; 
 		}
-		return arr + ','; 
+		return strRev + ','; 
 		})
+	console.log(str1, str2, str3, str4); 
 	console.log(`задание: 1. Создать две функции и дать им осмысленные названия:
 - первая функция принимает массив и колбэк (одна для всех вызовов)
 - вторая функция (колбэк) обрабатывает каждый элемент массива (для каждого вызова свой callback)
 	результат: ; 
 	объяснение: `) 
-/*
-function every(ArrNums, func){
-	// check if ArrNums is array
-	// callback - return true/false
-	//check if arrnums el > 5 
-	if (ArrNums.isArray([34,2,77,140,4,687,7,67]) === true){ 
-		let newArrNums = [];
-		for (let i = 0; i <= ArrNums.length; i++){
-			newArrNums.push(
-				func(ArrNums[i])
-			); 
-			return newArrNums; 
-		}
-	}
-	else{
-		console.log(`Not an array!`) 
-		}
-}
-	let filtArr = every(currI, index, function(ArrNums){
-		return currI > 5 ? filtArr.push(currI) 
-			: console.log('smth i don/t know what'); 
-	}); 
 
-console.log(filtArr); 
+function everyInArr(arr, callback){
+	if (Array.isArray(arr)){
+		let result = true; 
+		for (let item in arr){
+			if (!callback(item)) return false;
+		}
+		return result; 
+	}}
+	let check = everyInArr([34,2,77,140,4,687,7,67], function(item){
+		return item > 5; 
+	}); 
 
 
 
@@ -244,7 +270,7 @@ console.log(filtArr);
 	функция должна возвращать true или false в зависимости от результата вызова callback (проверить число больше 5). Callback  должен принимать один элемент массива, его индекс в массиве и весь массив.
 	результат: ; 
 	объяснение: `) 
-*/ 
+
 
 //FUNCTION METHODS
 
@@ -252,20 +278,38 @@ console.log(filtArr);
 
 	//array of objects {digit: 1, odd: true}
 
-		function oddOrEven(num){
+	/* 	function oddOrEven(num){
 			let obj = {}
 			obj.digit = num; 
 				if ((num % 2) === 1){
-					obj.odd = true; 4
+					obj.odd = true; 
 				}
 				else{
 					obj.odd = false; 
 				}
 				return obj;
 			
+		} */
+
+	function myMap(arr, callback){
+		let newStr = []; 
+		for (let i = 0; i < arr.length; i++){
+			newStr.push(callback(Arr[i]));
 		}
-		let numArrObj = numNum.map(function (num){return oddOrEven(num)});
-	console.log(oddOrEven(numNum)); 
+		return newStr;
+	}
+	let numArrObj2 = numNum.map(function(num){
+		let obj = {}
+		obj.digit = num; 
+			if ((num %2 ) === 1){
+				obj.odd = true; 
+			}
+			else{
+				obj.odd = false; 
+			}
+			return obj; 
+	}); 
+	console.log(numArrObj2); 
 
 	console.log(`задание: 1. На основе массива [1,2,3,5,8,9,10] сформировать новый массив,
 	каждый элемент которого будет хранить информацию о числе и его четности:
@@ -300,4 +344,3 @@ console.log(!(findZero.some(zeroZero)));
 	console.log(`задание: 
 	результат: ; 
 	объяснение: `) 
-
