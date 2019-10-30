@@ -150,7 +150,7 @@ console.log(`задание: 4.  Дан массив объектов, где к
 результат: ${newSrting}; 
 объяснение: `) 
 
-/*
+
 users = [
 	{name: 'Denis', age: '29', gender: 'male'} , 
 	{name: 'Ivan', age: '20', gender: 'male'}, 
@@ -158,7 +158,7 @@ users = [
 ]
 
 function funcGetUsers(arr, field, value){
-  for (let i = 0; i <= users.length; i++){
+  for (let i = 0; i < users.length; i++){
     let newArray = []
     if (arr[i].hasOwnProperty(field) && arr[i][field] === value){
        newArray.push(arr[i])
@@ -166,7 +166,7 @@ function funcGetUsers(arr, field, value){
     }
   }
 }
-  funcGetUsers(users, 'gender', 'male')*/ 
+  funcGetUsers(users, 'gender', 'male')
 
 console.log(`задание: 8. Создать функцию которая принимает массив пользователей, поле на которое хочу проверить и значение на которое хочу проверять. Проверять что все аргументы переданы. Возвращать новый массив с пользователями соответсвующие указанным параметрам.
 funcGetUsers(users, “gender”, “male”); // [ {name: “Denis”, age: “29”, gender: “male”} , {name: “Ivan”, age: “20”, gender: “male”} ]
