@@ -1,13 +1,12 @@
 
 function isParent(parent,child){
   let result = false;
-  for (let i = 0; i <= parent.children.length; i++){
-    if (parent.contains(child)){
-      result = true; 
+  if (parent.contains(child)){
+    result = true; 
     }
-  } 
   console.log(result);
 }
+
 
   /* if(child.closest(parent)){
     result = true;
