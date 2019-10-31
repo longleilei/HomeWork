@@ -30,7 +30,7 @@ isParent(document.querySelector('ul'), document.querySelector('mark'));
 результат:; 
 объяснение: `) 
 
-console.log(document.links)
+console.log(document.links) ////?????
 console.log(`задание: 2. Получить список всех ссылок, которые не находятся внутри списка ul
 результат:; 
 объяснение: `) 
@@ -42,11 +42,18 @@ console.log(`задание: 3. Найти элемент, который нах
 результат:; 
 объяснение: `) 
 
-console.log(document.querySelector('ul').childElementCount)
+console.log(document.querySelector('ul').childElementCount)///????
 console.log(`задание: 4. Посчитать количество элементов li в списке
 результат:; 
 объяснение: `) 
-
+let ul = document.querySelector('ul'),
+    count = 0;
+for (let elem of ul.children){
+  if (elem.matches('li')){
+    count++
+  }
+}
+console.log('li count', count)
 console.log(`задание: 
 результат:; 
 объяснение: `) 
