@@ -49,6 +49,7 @@ function addNewTodoToStorage(title, text){
     storage.todos.push(newTask);
 }
 
+//return unique id for every new task 
 function generateId(){
     const words = '0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
     let idString='';
@@ -63,11 +64,13 @@ function generateId(){
 
 
 function deleteTodoFromStorage(id){
+    //check the id 
     const checkIdRes = checkId(id);
     if (checkIdRes.error) return checkIdRes.msg;
-    let removedTask;
+    let removedTask; //to write in the deleted task 
     for(let i = 0; i < storage.todos.length; i++){
         if(storage.todos[i].id === id){
+            //assign the deletion to the empty object
             removedTask = storage.todos.splice(i, 1);
             break;
         }
@@ -76,12 +79,14 @@ function deleteTodoFromStorage(id){
 }
 
 function checkId(id){
+    // if id wasn't assigned 
     if (!id){
        return {
             error: true,
             msg: 'Передай Id!'
         }
     }
+    //if there's no such id in the storage 
     let check = storage.todos.some(function(task){
         return task.id === id;
     })
@@ -97,5 +102,19 @@ function checkId(id){
 }
 
 function editTodoFromStorage(id, title, text){
-    
+    //check the id similar to delete function
+    const checkIdRes = checkId(id);
+    //get the input from the user 
+    let newTitle = ''; 
+    let newText = ''; 
+    //iterate and assign new values if the element was found by the array
+    if (checkIdRes.error) return checkIdRes.msg;
+    for(let i = 0; i < storage.todos.length; i++){
+        if(storage.todos[i].id === id){
+            //edit title and text
+            storage.todos[i].title = newTitle; 
+            storage.todos[i].text = newText; 
+
+        }
+    }
 }

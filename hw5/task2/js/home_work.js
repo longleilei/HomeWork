@@ -30,7 +30,16 @@ isParent(document.querySelector('ul'), document.querySelector('mark'));
 результат:; 
 объяснение: `) 
 
+<<<<<<< Updated upstream
 console.log(document.links) ////?????
+=======
+let ul = document.querySelector('ul')
+for (let link of document.links ){
+  if (!ul.contains(link)){
+    console.log(link)
+  }
+}
+>>>>>>> Stashed changes
 console.log(`задание: 2. Получить список всех ссылок, которые не находятся внутри списка ul
 результат:; 
 объяснение: `) 
