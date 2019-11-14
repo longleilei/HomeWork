@@ -14,24 +14,22 @@ function infoDOM(node){
   infoObj.type = node.nodeType; 
   infoObj.name = node.tagName; 
   infoObj.childNum = node.childNodes.length; 
-  //return infoObj - returns [object:object]
-  console.log(JSON.stringify({infoObj})); 
+  return infoObj;
 }
 console.log(`задание: 2. Создать функцию, которая принимает в качестве аргумента узел DOM и возвращает информацию (в виде объекта) о типе узла, об имени узла и о количестве дочерних узлов (если детей нет - 0).
-результат:${infoDOM(document.querySelector('div'))}; 
+результат:${JSON.stringify(infoDOM(document.querySelector('div')))}; 
 объяснение: `) 
 
-let arr = [];
-function getTextFromUl(ul,arr){
-  for (let el = 0; el<= ul.length; el++){
-    let textEl = ul[el].textContent; 
-    arr.push(textEl)
-    return arr;  
-}
-  
 
+function getTextFromUl(ul){
+  let list = ul.getElementsByTagName('a'); 
+  let arr = [];
+  for (let el of list){
+    arr.push(el.textContent);    
 }
-console.log(getTextFromUl(document.querySelector('ul li'))); 
+return arr; 
+}
+console.log(getTextFromUl(document.querySelector('ul'))); 
 
 console.log(`задание: 3. Получить массив, который состоит из текстового содержимого ссылок внутри списка: getTextFromUl(ul) ---> ["Link1", "Link2", "Link3"]
 результат:; 
@@ -39,16 +37,11 @@ console.log(`задание: 3. Получить массив, который с
 
 let change = document.querySelector('p').childNodes;
 let changeList = Array.from(change); 
-changeList.forEach((element) => {
-  if (element instanceof String){
-    element = '-text-'
+changeList.forEach((node) => {
+  if (node.nodeType ===  3){
+    node.data = '-text-'
     }
   });
-
-
-//el.data = '-text-'  
-//change.firstChild.data = '-text-'
-//change.nextSibling.data = '-text'
 
 
 console.log(`задание: 4. В параграфе заменить все дочерние текстовые узлы на “-text-” (вложенные теги должны остаться). Конечный результат:
@@ -67,7 +60,7 @@ console.log(`задание: 1. Найти в коде список ul и доб
 
 let links = Array.from(document.querySelectorAll('a')).filter(link => !link.closest('ul')); 
 for (let link of links){
-  link.classList.add('id=link')
+  link.id = link; 
 }
 console.log(links)
 
@@ -76,20 +69,25 @@ console.log(`задание: 2. Найти в коде ссылку, наход�
 результат:; 
 объяснение: `) 
 
-let oddUlArray = Array.from(document.querySelector('ul'));
-for (let i = 0; i<= oddUlArray.length;i++){
-  if (i === 0 || i%1 === 0 ){
-    //oddUlArray[i].classList.add('item')
-  }
+function setClassItem(ul, className){
+  let list = ul.getElementsByTagName('li'); 
+  if (!list.length) return; //exit
+
+  for (let i = 0; i < list.length; i++){
+    if (i % 2 === 0){
+      list[i].classList.add(className); 
+    }
+  } 
 }
-  console.log(oddUlArray)
-//odd.classList.add('item')
-//console.log(oddUlArray)
+
+setClassItem(document.querySelector('ul'), 'item'); 
+console.log(document.querySelector('ul')); 
 
 console.log(`задание: 3. На li через один (начиная с самого первого) установить класс “item”
 результат:; 
 объяснение: `) 
-let allLinks = document.querySelectorAll('a').forEach(link => link.classList.add('custom-link'))
+
+let allLinks = Array.from(document.links).forEach(link => link.classList.add('custom-link'))
 console.log(allLinks)
 
 console.log(`задание: 4. На все ссылки в примере установить класс “custom-link”

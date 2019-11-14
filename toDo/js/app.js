@@ -33,8 +33,25 @@
 //     }
 // }
 
+//UI Element 
+
+const form = document.forms['addToDoForm']; 
+const title = form.elements['title'];
+const text = form.elements['text'];
+const table = document.querySelector('table tbody')[0]; 
+
+form.addEventListener('submit',function(e){
+    e.preventDefault();
+    //validation of form 
+    addNewTodoToStorage(title.value,text.value);
+})
+
+
 let storage = {
-    todos : []
+    todos : [
+        {
+
+        }]
 };
 
 
@@ -47,7 +64,26 @@ function addNewTodoToStorage(title, text){
         text
     }
     storage.todos.push(newTask);
+    addToDoToView (newTask); 
 }
+
+function addNewTodoToView(task){
+    //create template 
+    let template = getToDoTemplate(task); 
+    table.insertAdjacentHTML('beforeend', template); 
+}
+
+function getToDoTamplate(task){
+    return `
+    <tr data-id = '${task.id}'>
+    <td class='text-center'>${task.title}</td>
+    <td> class='text-center'>${task.title}</td> 
+    <td class='text-center'>
+        <i class='fas fa-trash></i>
+       <i class='fas fa-edit'></li> 
+        </td>  
+    </tr>
+    `}
 
 //return unique id for every new task 
 function generateId(){
@@ -104,9 +140,6 @@ function checkId(id){
 function editTodoFromStorage(id, title, text){
     //check the id similar to delete function
     const checkIdRes = checkId(id);
-    //get the input from the user 
-    let newTitle = ''; 
-    let newText = ''; 
     //iterate and assign new values if the element was found by the array
     if (checkIdRes.error) return checkIdRes.msg;
     for(let i = 0; i < storage.todos.length; i++){
@@ -114,7 +147,7 @@ function editTodoFromStorage(id, title, text){
             //edit title and text
             storage.todos[i].title = newTitle; 
             storage.todos[i].text = newText; 
-
+            return storage.todos[i]; 
         }
     }
 }
