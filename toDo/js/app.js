@@ -38,10 +38,24 @@
 const form = document.forms['addToDoForm']; 
 const title = form.elements['title'];
 const text = form.elements['text'];
-const table = document.querySelector('table tbody')[0]; 
+const table = document.querySelector('table tbody'); 
+window.localStorage.setItem("ttt", 'sdghkfsdj')
 
-form.addEventListener('submit',function(e){
-    e.preventDefault();
+const card = document.querySelector('.card'); 
+
+table.addEventListener('click', (event)=>{
+    if(event.target.classList.contains("fa-trash")){
+        let tr = event.target.closest('tr');
+        let id = tr.dataset['id'];
+        deleteTodoFromStorage(id, tr)
+    }
+    
+});
+
+
+
+form.addEventListener('submit',function(event){
+    event.preventDefault();
     //validation of form 
     addNewTodoToStorage(title.value,text.value);
 })
@@ -64,7 +78,7 @@ function addNewTodoToStorage(title, text){
         text
     }
     storage.todos.push(newTask);
-    addToDoToView (newTask); 
+    addNewTodoToView(newTask); 
 }
 
 function addNewTodoToView(task){
@@ -73,14 +87,14 @@ function addNewTodoToView(task){
     table.insertAdjacentHTML('beforeend', template); 
 }
 
-function getToDoTamplate(task){
+function getToDoTemplate(task){
     return `
     <tr data-id = '${task.id}'>
-    <td class='text-center'>${task.title}</td>
-    <td> class='text-center'>${task.title}</td> 
-    <td class='text-center'>
-        <i class='fas fa-trash></i>
-       <i class='fas fa-edit'></li> 
+        <td class='text-center'>${task.title}</td>
+        <td class='text-center'>${task.text}</td> 
+        <td class='text-center'>
+            <i class='fas fa-trash'></i>
+            <i class='fas fa-edit'></i> 
         </td>  
     </tr>
     `}
@@ -99,7 +113,7 @@ function generateId(){
 
 
 
-function deleteTodoFromStorage(id){
+function deleteTodoFromStorage(id, tr){
     //check the id 
     const checkIdRes = checkId(id);
     if (checkIdRes.error) return checkIdRes.msg;
@@ -111,6 +125,7 @@ function deleteTodoFromStorage(id){
             break;
         }
     }
+    table.removeChild(tr);
     return removedTask;
 }
 
