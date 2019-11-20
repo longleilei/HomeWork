@@ -47,7 +47,17 @@ table.addEventListener('click', (event)=>{
     if(event.target.classList.contains("fa-trash")){
         let tr = event.target.closest('tr');
         let id = tr.dataset['id'];
-        deleteTodoFromStorage(id, tr)
+        deleteTodoFromStorage(id, tr);
+    }
+    if (event.target.classList.contains("fa-edit")){
+        let tr = event.target.closest('tr');
+        let id = tr.dataset['id'];
+        let title = storage.todos.title; 
+        let text = storage.todos.text;
+        document.getElementById('title').value = title; 
+        document.getElementById('text').value = text; 
+        document.querySelector('button').innerHTML = 'Edit the task';  
+        editTodoFromStorage(id, title, text)
     }
     
 });
@@ -58,7 +68,12 @@ form.addEventListener('submit',function(event){
     event.preventDefault();
     //validation of form 
     addNewTodoToStorage(title.value,text.value);
+    //reset form after submitting 
+    //document.getElementsByTagName("form").reset();
+
 })
+
+
 
 
 let storage = {
@@ -93,7 +108,7 @@ function getToDoTemplate(task){
         <td class='text-center'>${task.title}</td>
         <td class='text-center'>${task.text}</td> 
         <td class='text-center'>
-            <i class='fas fa-trash'></i>
+            <i class=' s fa-trash'></i>
             <i class='fas fa-edit'></i> 
         </td>  
     </tr>
