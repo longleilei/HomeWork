@@ -91,7 +91,9 @@ ui.form.addEventListener('submit',function(event){
     editTodoFromStorage(id, ui.title.value,ui.text.value);
     //reset form after submitting 
     //document.getElementsByTagName("form").reset();
-    ui.form.dataset['id'] = null; }
+    ui.form.dataset['id'] = ''; 
+    ui.form.querySelector('button').innerHTML = 'Add task';
+    }
 
     ui.form.reset(); 
 })
@@ -139,7 +141,7 @@ function getToDoTemplate(task){
         <td class='text-center'>${task.title}</td>
         <td class='text-center'>${task.text}</td> 
         <td class='text-center'>
-            <i class=' s fa-trash'></i>
+            <i class='fas fa-trash'></i>
             <i class='fas fa-edit'></i> 
         </td>  
     </tr>
