@@ -1,0 +1,125 @@
+<!DOCTYPE html> 
+  <head> 
+    <meta charset="utf-8">
+    <style>
+    #title{
+      text-align: center; 
+      font-family: 'Helvetica', sans-serif; 
+      font-size: 36px; 
+      padding: 20px; 
+      
+    }
+    .carousel{
+      /*position: relative; */ 
+      width: 100%; 
+      overflow: hidden; 
+
+      
+    }
+    .carousel img{
+      width: 410px; 
+      height: 550px; 
+      margin-right: 5px; 
+      margin-top: 10px; 
+    }
+    #btn{
+      width: 150px; 
+      display: flex; 
+      flex-direction: row; 
+      justify-content: space-between; 
+      margin: auto; 
+    }
+    .arrow{
+      padding: 0;
+      border-radius: 25px;
+      border: 1px solid gray;
+      font-size: 40px;
+      line-height: 40px;
+      color: #444;
+      display: block;   
+    }
+    .arrow:focus {
+    outline: none;
+    }
+
+    .arrow:hover {
+      background: #ccc;
+      cursor: pointer;
+    }
+
+    .prev {
+    left: 7px;
+    }
+
+    .next {
+    right: 7px;
+    }
+    .gallery{
+      width: 9999px;  
+    }
+    .gallery ul{
+      height: 530px; 
+      width: 100%; 
+      margin: 0; 
+      padding: 0; 
+      list-style: none; 
+      transition: margin-left 250ms; 
+      font-size: 0; 
+      
+    }
+    .gallery ul li{
+      display: inline; 
+    }
+    </style> 
+  </head> 
+  <body>
+  <div id = 'title'>Life in Ukraine</div>
+  <div id='carousel' class='carousel'>
+  <div id='btn'>
+    <button class='arrow prev' id='prev'>⇦</button>
+    <button class='arrow next' id='next'>⇨</button>
+  </div>
+    <div class='gallery'>
+      <ul class='images'>
+        <li><img src='img/1.jpg'></li>
+        <li><img src='img/2.jpg'></li>
+        <li><img src='img/3.jpg'></li>
+        <li><img src='img/4.jpg'></li>
+        <li><img src='img/5.jpg'></li>
+        <li><img src='img/6.jpg'></li>
+        <li><img src='img/7.jpg'></li>
+        <li><img src='img/8.jpg'></li>
+        <li><img src='img/9.jpg'></li>
+        <li><img src='img/10.jpg'></li>
+        <li><img src='img/11.jpg'></li>
+        <li><img src='img/12.jpg'></li>
+        <li><img src='img/13.jpg'></li>
+      </ul>
+    </div> 
+  </div> 
+  <script>
+  let width = 410; 
+  let count = 3; 
+  let list = carousel.querySelector('ul'); 
+  let listElems = carousel.querySelectorAll('li');
+
+  let position = 0; 
+
+  let prev = document.getElementById('prev')
+  prev.addEventListener('click',function(){
+    position += width * count; 
+    position = Math.min(position, 0); 
+    list.style.marginLeft = position + 'px';
+  })
+
+  let next = document.getElementById('next')
+  next.addEventListener('click',function(){
+    position -= width * count; 
+     position = Math.max(position, -width * (listElems.length - count));
+      list.style.marginLeft = position + 'px'; 
+  })
+
+  </script> 
+  </body>
+</html> 
+
