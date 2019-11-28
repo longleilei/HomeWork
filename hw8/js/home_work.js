@@ -7,10 +7,10 @@ console.log(`задание: 1.По нажатию на кнопку "btn-msg" �
 объяснение: `) 
 
 btn.addEventListener('mouseover', function(event){
-  event.target.style.backgroundColor = 'red';  
+  event.target.classList.toggle('active');  
 }); 
 btn.addEventListener('mouseout',function(event){
-  event.target.style.backgroundColor = 'white'; 
+  event.target.classList.toggle('active'); 
 })
 
 console.log(`задание: 2. При наведении указателя мыши на "btn-msg", кнопка становится красной; когда указатель мыши покидает кнопку, она становится прежнего цвета. Цвет менять можно через добавление класса.
@@ -42,7 +42,6 @@ let btnGen = document.getElementById('btn-generate');
 btnGen.addEventListener('click', function(){
    let ul = document.querySelector('ul'); 
    let count = ul.getElementsByTagName('li').length; 
-   let lChild = document.querySelector('ul').lastChild; 
    let fragment =  `<li class='new item'>item ${count+1}</li>`
    ul.insertAdjacentHTML('beforeend', fragment)
 }) 

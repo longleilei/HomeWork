@@ -34,43 +34,66 @@
 // }
 
 //UI Element 
+let ui = {
+    form : document.forms['addToDoForm'],
+    table : document.querySelector('table tbody')  
+}; 
 
-const form = document.forms['addToDoForm']; 
-const title = form.elements['title'];
-const text = form.elements['text'];
-const table = document.querySelector('table tbody'); 
-window.localStorage.setItem("ttt", 'sdghkfsdj')
+ui.title = ui.form.elements['text'];
+ui.text = ui.form.elements['title'];
 
-const card = document.querySelector('.card'); 
-
-table.addEventListener('click', (event)=>{
+ui.table.addEventListener('click', (event)=>{
     if(event.target.classList.contains("fa-trash")){
         let tr = event.target.closest('tr');
         let id = tr.dataset['id'];
-        deleteTodoFromStorage(id, tr);
+        deleteTodoFromStorage(id);
+        deleteFromView(id);
     }
     if (event.target.classList.contains("fa-edit")){
         let tr = event.target.closest('tr');
-        let id = tr.dataset['id'];
-        let title = storage.todos.title; 
-        let text = storage.todos.text;
-        document.getElementById('title').value = title; 
-        document.getElementById('text').value = text; 
-        document.querySelector('button').innerHTML = 'Edit the task';  
-        editTodoFromStorage(id, title, text)
+        let id = tr.dataset['id']; 
+
+        let todo = getToDoById(id)
+
+        //get these from getToDoById and write to new variables 
+        let _title = todo.title; 
+        let _text = todo.text;
+
+        //write in inputs 
+        ui.title.value = _title; 
+        ui.text.value = _text; 
+         
+        ui.form.querySelector('button').innerHTML = 'Edit the task';
+        //when we press 'edit the task', the right funtion will be implemented   
+        ui.form.dataset['id'] = id; 
+
+        //editTodoFromStorage(id, title, text)
     }
     
 });
 
 
 
-form.addEventListener('submit',function(event){
+ui.form.addEventListener('submit',function(event){
     event.preventDefault();
+    let id = ui.form.dataset['id']; 
+    let title = ui.title.value; 
+    let text = ui.text.value; 
+
+    ui.title.classList.remove('is-invalid'); 
+    ui.text.classList.remove('is-invalid'); 
     //validation of form 
-    addNewTodoToStorage(title.value,text.value);
+    if (!title){ui.title.classList.add ('is-invalid'); return; }
+    if(!text) {ui.text.classList.add ('is-invalid'); return; }
+    if(!id){
+        addNewTodoToStorage(ui.title.value, ui.text.value); 
+    }else{
+    editTodoFromStorage(id, ui.title.value,ui.text.value);
     //reset form after submitting 
     //document.getElementsByTagName("form").reset();
+    ui.form.dataset['id'] = null; }
 
+    ui.form.reset(); 
 })
 
 
@@ -83,6 +106,14 @@ let storage = {
         }]
 };
 
+function getToDoById(id){
+    for (let i = 0; i < storage.todos.length; i++){
+        if(storage.todos[i].id === id){
+            return storage.todos[i]
+        }
+    }
+    return null; 
+}
 
 function addNewTodoToStorage(title, text){
     if (!title) return;
@@ -99,7 +130,7 @@ function addNewTodoToStorage(title, text){
 function addNewTodoToView(task){
     //create template 
     let template = getToDoTemplate(task); 
-    table.insertAdjacentHTML('beforeend', template); 
+    ui.table.insertAdjacentHTML('beforeend', template); 
 }
 
 function getToDoTemplate(task){
@@ -125,10 +156,13 @@ function generateId(){
 
     return idString;
 }
+function deleteFromView(id){
+    let tr = ui.table.querySelector(`[data-id='${id}']`); 
+    ui.table.removeChild(tr); 
+}
 
 
-
-function deleteTodoFromStorage(id, tr){
+function deleteTodoFromStorage(id){
     //check the id 
     const checkIdRes = checkId(id);
     if (checkIdRes.error) return checkIdRes.msg;
@@ -140,7 +174,6 @@ function deleteTodoFromStorage(id, tr){
             break;
         }
     }
-    table.removeChild(tr);
     return removedTask;
 }
 
@@ -167,17 +200,18 @@ function checkId(id){
     return {error: false};
 }
 
-function editTodoFromStorage(id, title, text){
+function editTodoFromStorage(id, newTitle, newText){
     //check the id similar to delete function
     const checkIdRes = checkId(id);
     //iterate and assign new values if the element was found by the array
     if (checkIdRes.error) return checkIdRes.msg;
-    for(let i = 0; i < storage.todos.length; i++){
-        if(storage.todos[i].id === id){
-            //edit title and text
-            storage.todos[i].title = newTitle; 
-            storage.todos[i].text = newText; 
-            return storage.todos[i]; 
-        }
-    }
+    let todo = getToDoById(id); 
+
+    /* todo.title is a field from the storage
+    newTitle is a field that accepts the value ui.title.value from addEventListener*/ 
+
+    todo.title = newTitle; 
+    todo.text= newText; 
+    deleteFromView(todo.id); 
+    addNewTodoToView(todo); 
 }

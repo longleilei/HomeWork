@@ -58,7 +58,7 @@ let fragment = `<img src = 'https://static.boredpanda.com/blog/wp-content/upload
 body.insertAdjacentHTML('afterbegin', fragment) */ 
 
 
-let body = document.querySelector('body'); 
+let body = document.body; 
 let img = document.createElement('img'); 
 img.src = 'https://static.boredpanda.com/blog/wp-content/uploads/2016/03/hairy-fluffy-cat-sky-the-ragdoll-31.jpg'
 img.alt = 'Cat' 
@@ -87,6 +87,24 @@ liArr.split().sort(function(prev,next){
   for (let i of liArr){
     return next.i - prev.i}
 })
+
+
+function sortList(newUl){
+  let liArr = newUl.getElementsByTagName('li'); 
+  let fragment = document.createDocumentFragment(); let arr = Array.from(liArr); 
+  arr.sort((prev,next) =>{
+    if(next.firstChild.textContent > prev.firstChild.textContent) return 1; 
+    if(next.firstChild.textContent < prev.firstChild.textContent) return -1; 
+    return 0; 
+  })
+  for (let item of arr){
+    fragment.appendChild(item.cloneNode(true))
+  }
+  newUl.innerHTML = '';
+  newUl.appendChild(fragment);  
+}
+
+sortList(document.querySelector('ul'))
 /* document.querySelector('ul').innerHTML = ''
 document.querySelector('ul').append(arr) */
 
