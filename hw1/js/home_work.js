@@ -231,5 +231,26 @@ console.log(`задание:;
 результат: 
 объяснение: `);
 
+obj = {"bounding_boxes":[],
+"count":3,
+"entity_id":"hkstp_minibus",
+"name":"minibus",
+"timestamp":1575025798000,
+"timestamp_boxes":1575023397000.0,
+"zone_name":"hkstp"} 
+
+let count = 0; 
+let time = new Date(); 
+
+for (let key in obj){
+	if(key === "count"){
+		//console.log(key + ' => ' + obj[key]) 
+		console.log(count += obj[key])
+		}
+		if (key === "timestamp"){
+			console.log(obj[key])
+		}
+  }
 
 
+let timeRetr = new Date(msg.payload.timestamp); 
