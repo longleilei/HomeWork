@@ -81,7 +81,7 @@ const details = {
   singlePrice: 12
 }
 
-console.log(products.totalPrice.call(details, details.detailsAmount, details.singlePrice)); 
+console.log(products.totalPrice.call(details, details.detailsAmount, details.singlePrice)); // зачем передавать detailsAmount и singlePrice? они берутся из this
 
 
 console.log(`задание: Создать объект с розничной ценой и количеством продуктов. Этот
@@ -128,10 +128,10 @@ console.log(`задание: Измените функцию getElementHeight т
 
 function minus(num1){
   return function(num2){
-    if (num1 === undefined){
+    if (num1 === undefined){ // тут лучше делать проверку на number т.к. возможжны null и другие типы данных
       num1 = 0; 
     }
-    if (num2 === undefined){
+    if (num2 === undefined){ // тут лучше делать проверку на number т.к. возможжны null и другие типы данных
       num2 = 0; 
     }
     let minusNums = num1-num2; 
@@ -186,7 +186,7 @@ const newModule = (function(init){
 
   return{
     setString: function(value){
-     if (value === undefined){
+     if (value === undefined){ // лучше задать значение по умолчанию чем прверку на undefined
         value = ' ';
         return value;  
        }
