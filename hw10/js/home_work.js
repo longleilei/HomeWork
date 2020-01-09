@@ -68,20 +68,20 @@ console.log(`задание: 4. Создать объект “вычислит�
 
 
 const products = {
-  productAmount: 12, 
-  productPrice: 243, 
+  amount: 12, 
+  price: 243, 
   totalPrice: function(){
-    return this.productAmount * this.productPrice 
+    return this.amount * this.price 
   }
 }
 console.log(products.totalPrice()); 
  
 const details = {
-  detailsAmount: 37, 
-  singlePrice: 12
+  amount: 37, 
+  price: 12
 }
 
-console.log(products.totalPrice.call(details, details.detailsAmount, details.singlePrice)); // зачем передавать detailsAmount и singlePrice? они берутся из this
+console.log(products.totalPrice.call(details)); // зачем передавать detailsAmount и singlePrice? они берутся из this
 
 
 console.log(`задание: Создать объект с розничной ценой и количеством продуктов. Этот
@@ -118,7 +118,7 @@ let element = {
 };
 
 let getElementHeight = element.getHeight.bind(element);
-console.log(getElementHeight()); // undefined
+console.log(getElementHeight()); 
 
 
 console.log(`задание: Измените функцию getElementHeight таким образом, чтобы можно было вызвать getElementHeight() и получить 25.
@@ -128,10 +128,10 @@ console.log(`задание: Измените функцию getElementHeight т
 
 function minus(num1){
   return function(num2){
-    if (num1 === undefined){ // тут лучше делать проверку на number т.к. возможжны null и другие типы данных
+    if (typeof(num1) !== "number"){ // тут лучше делать проверку на number т.к. возможжны null и другие типы данных
       num1 = 0; 
     }
-    if (num2 === undefined){ // тут лучше делать проверку на number т.к. возможжны null и другие типы данных
+    if (!num2){ // тут лучше делать проверку на number т.к. возможжны null и другие типы данных
       num2 = 0; 
     }
     let minusNums = num1-num2; 
@@ -180,31 +180,31 @@ multiply(10); // 120 (12 * 10)
 результат:; 
 объяснение: `) 
 
-const newModule = (function(init){
+const newModule = (function(){
 
-  let value = init; 
+  let value = ''; 
 
   return{
-    setString: function(value){
-     if (value === undefined){ // лучше задать значение по умолчанию чем прверку на undefined
+    setString: function(v){
+     if (!v){ // лучше задать значение по умолчанию чем прверку на undefined
         value = ' ';
         return value;  
        }
-      if (typeof(value) === 'number'){
-        value = value.toString()
+      if (typeof(v) === 'number'){
+        value = v.toString();
         return value; 
       }
       else{
         return value;  
       }
     }, 
-    getString: function(value){
+    getString: function(){
       return value; 
     }, 
-    getStrLength: function(value){
+    getStrLength: function(){
       return value.length; 
     }, 
-    getStrReversed: function(value){
+    getStrReversed: function(){
       let newStr = ''; 
       for(let i = value.length - 1; i>= 0; i--){
         newStr += value[i]; 
@@ -236,42 +236,38 @@ d. получить строку-перевертыш
 объяснение: `) 
 
 
-const calculator = (function (){
+const Calculator = function (){
 
   let answer; 
 
-  function setValue(value=0){
+  this.setValue = function (value=0){
       answer = value;
-      return this;}
+      return this;
+    }
 
-  function addValue(value){
+  this.addValue = function (value){
     answer += value;
     return this;}
 
-  function multiplyValue(value){
+  this.multiplyValue = function (value){
     answer *= value;
     return this;}
 
-  function powerValue(value){ 
+  this.powerValue = function (value){ 
     Math.pow(answer,value)
     return this; 
   }
 
-  function learnValue(){ 
+  this.learnValue = function(){ 
     answer =+ answer.toFixed(2);
     return answer;}
+  
+}; 
 
-  return{
-    setValue, 
-    addValue, 
-    multiplyValue, 
-    powerValue,
-    learnValue
-  }
-})(); 
+let objCalculator = new Calculator();
 
-console.log(calculator.setValue(10).addValue(5).multiplyValue(2).learnValue()); 
-console.log(calculator.setValue(10).powerValue(2).learnValue()); 
+console.log(objCalculator.setValue(10).addValue(5).multiplyValue(2).learnValue()); 
+console.log(objCalculator.setValue(10).powerValue(2).learnValue()); 
 
 
 
@@ -283,3 +279,58 @@ console.log(`задание: Создайте модуль “калькулят
 console.log(`задание: 
 результат:; 
 объяснение: `) 
+
+
+function CreateList(type, prefix = 'property') {
+  let index = 0;
+  this.list = type === 'array' ? [] : {};
+  this.prefix = prefix;
+  
+}
+CreateList.getClassName = function () {
+  return "CreateList"
+}
+CreateList.getClassName();
+
+CreateList.prototype.setProp = function(value) {
+  if (type === 'array') { this.list.push(value); }
+  else {
+       this.list[this.prefix + index] = value;
+       index++;
+   }
+}
+
+CreateList.prototype.getPrefix = function(){};
+
+class CreateListES6{
+  constructor(type, prefix = 'property'){
+    this.list = type === 'array' ? [] : {};
+    this.prefix = prefix;
+  }
+  getPrefix() {
+    return this.prefix;
+  }
+  setProp(value) {
+    if (type === 'array') { this.list.push(value); }
+    else {
+         this.list[this.prefix + index] = value;
+         index++;
+     }
+  }
+  static getClassName(){
+    return "CreateListES6"
+  }
+}
+
+CreateListES6.getClassName();
+
+let list = new CreateListES6('array', 'item');
+/* {
+  list:[],
+  prefix: 'item'
+  __proto__:
+  {
+    getPrefix,
+    setProp
+  }
+} */
