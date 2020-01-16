@@ -120,37 +120,74 @@ Component.prototype.setText = function (text) {
 результат:; 
 объяснение: `) 
 
+
 class Calculator{
-  constructor(initVal,num){
+  constructor(initVal){
     this.initVal = initVal || 1; 
-    this.num = num; 
   }
-  get curNum(){return `Current number is ${this.num}`}
-  set curNum(num){this.initVal = num; }
+  get curNum(){return `Current number is ${this.initVal}`}
+  set curNum(answer){this.initVal = answer;}
 
-  sum(num){
-    return num + this.initVal; 
+  sum(answer){
+    answer += this.initVal;
+    return answer; 
   }
-  fraction(num){
-    return num - this.initVal; 
-  }
-
-  product(num){
-    return num * this.initVal; 
+  fraction(answer){
+    answer -= this.initVal;
+    return answer; 
   }
 
-  partition(num){
-    return num/this.initVal; 
+  product(answer){
+    answer *= this.initVal; 
+    return answer; 
+  }
+
+  partition(answer){
+    answer /= this.initVal; 
+    return answer; 
   }
 }
 
-const expl = new Calculator(45,33); 
+/*class Calculator{
+  constructor(initVal){
+    this.initVal = initVal || 1; 
+  }
+  get curNum(){return `Current number is ${this.initVal}`}
+  set curNum(newVal){this.initVal = newVal;}
+
+
+  sum(){
+    this.initVal += this.initVal;
+    return this; 
+  }
+  fraction(){
+    this.initVal -= this.initVal;
+    return this; 
+  }
+
+  product(){
+    this.initVal *= this.initVal; 
+    return this; 
+  }
+
+  partition(){
+    this.initVal /= this.initVal; 
+    return this; 
+  }
+}*/ 
+
+const expl = new Calculator(45); 
+const expl1 = new Calculator(33); 
 console.log(expl.curNum)
-console.log(expl.curNum)
-console.log(expl.sum(33)) 
-console.log(expl.fraction(28)) 
-console.log(expl.product(9))
-console.log(expl.partition(3))
+console.log(expl.sum()) 
+console.log(expl.fraction())
+console.log(expl.product())
+console.log(expl.partition())
+console.log(expl1.curNum)
+console.log(expl1.sum()) 
+console.log(expl1.fraction()) 
+console.log(expl.product())
+console.log(expl.partition())
 
 console.log(`задание: 3. Создать класс калькулятора который будет принимать стартовое значение и у него будут методы сложить, вычесть, умножить , разделить. Также у него должны быть геттер и сеттер для получения и установки текущего числа с которым производятся вычисления.
 результат:; 
