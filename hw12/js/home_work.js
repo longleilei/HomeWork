@@ -1,37 +1,36 @@
-class HttpReq{
-  get(url,callback){
-    let xhr = new XMLHttpRequest(); 
-    xhr.open('GET',url); 
+class HttpReq {
+  get(url, callback) {
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', url);
     xhr.send()
-    xhr.addEventListener('load', ()=>{
+    xhr.addEventListener('load', () => {
       callback(JSON.parse(xhr.responseText))
     })
   }
-  post(url,callback){
-    let xhr = new XMLHttpRequest(); 
-    xhr.open('POST',url); 
+  post(url, callback) {
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', url);
     xhr.send(body)
-    xhr.addEventListener('load', ()=>{
+    xhr.addEventListener('load', () => {
       callback(xhr.responseText)
-
     })
   }
 }
 
-let customHttp = new HttpReq(); 
-customHttp.get('https://jsonplaceholder.typicode.com/users', (response)=>{
+let customHttp = new HttpReq();
+customHttp.get('https://jsonplaceholder.typicode.com/users', (response) => {
   let container = document.getElementsByClassName('accordion')[0];
-for (let i = 0; i < response.length; i++){
+  for (let i = 0; i < response.length; i++) {
     let user = response[i];
     console.log(user.name);
     let fragment = generateTemplate(user);
-    container.insertAdjacentHTML('beforeend',fragment);
+    container.insertAdjacentHTML('beforeend', fragment);
   }
 
 })
-
+setTimeout(()=>{})
 function generateTemplate(user) {
-  return /* html */`
+  return /* html */ `
   <div class="card">
   <div class="card-header" id="card-item-${user.id}">
     <h2 class="mb-0">
@@ -47,7 +46,7 @@ function generateTemplate(user) {
     </div>
   </div>
 </div>`
-  
+
 }
 
 
@@ -61,4 +60,4 @@ console.log(`задание: Получить пользователей (users)
 
 console.log(`задание: 
 результат:; 
-объяснение: `) 
+объяснение: `)
