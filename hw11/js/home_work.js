@@ -123,28 +123,28 @@ Component.prototype.setText = function (text) {
 
 class Calculator{
   constructor(initVal){
-    this.initVal = initVal || 1; 
+    this.answer = initVal || 1; 
   }
   get curNum(){return `Current number is ${this.initVal}`}
-  set curNum(answer){this.initVal = answer;}
+  set curNum(answer){this.answer = initVal;}
 
-  sum(answer){
-    answer += this.initVal;
-    return answer; 
+  sum(initVal){
+    this.answer += initVal;
+    return this; 
   }
-  fraction(answer){
-    answer -= this.initVal;
-    return answer; 
-  }
-
-  product(answer){
-    answer *= this.initVal; 
-    return answer; 
+  fraction(initVal){
+    this.answer -= initVal;
+    return this; 
   }
 
-  partition(answer){
-    answer /= this.initVal; 
-    return answer; 
+  product(initVal){
+    this.answer *= initVal; 
+    return this; 
+  }
+
+  partition(initVal){
+    this.answer /= initVal; 
+    return this; 
   }
 }
 
