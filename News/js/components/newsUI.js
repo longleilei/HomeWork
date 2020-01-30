@@ -13,14 +13,7 @@ class NewsUI{
   }
   //add news to container 
   addNews(article){   
-   /* if (!article){
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Something went wrong!',
-        footer: '<a href>Why do I have this issue?</a>'})
-    }*/ 
-
+  
 
     this.generateFullTemplate = this.generateTemplate(article);
     this.container.insertAdjacentHTML("beforeend", this.generateFullTemplate); 
@@ -28,7 +21,21 @@ class NewsUI{
 
   //template card for the container 
 
+  addAllNews(articles){
+   if (!articles.length){
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'No articles'})
+        return;
+    }
 
+    this.generateFullTemplate = '';
+    articles.forEach(element => {
+      this.generateFullTemplate += this.generateTemplate(element)
+    });
+    this.container.insertAdjacentHTML("beforeend", this.generateFullTemplate); 
+  }
 
   generateTemplate(article){
     return /* html */ `
