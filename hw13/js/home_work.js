@@ -59,23 +59,29 @@ setTimeout(() => inst.resolve('test'), 5000);
 
 */
 
-/*class Prom {
-  constructor(promise){
-      this.promise = promise; 
+class CustomProm {
+  constructor(){
+      this.promise = new Promise((res, rej)=>{
+        this.res  = res;
+        this.rej = rej;
+      }); 
   }
-  promise  =  new Promise((resolve, reject)=>{
-    resolveProm(value => resolve(value));
-    rejectProm(() =>
-      //let rejected = new Error(this.promise + $` doesn\'t work`); 
-      reject(rejected)); 
-    })
-}*/ 
+  resolve(arg){
+    this.res(arg);
+  }
+  reject(){
+    this.rej()
+  }
   
-/*
-const inst = new Prom();
-inst.promise.then(data => console.log(data));
-setTimeout(() => inst.resolve('test'), 5000); */ 
+} 
+  
 
+const inst = new CustomProm();
+inst.promise.then(data => console.log(data));
+
+inst.promise.then(data => console.log(data.target));
+/* setTimeout(() => inst.resolve('test'), 5000);  */
+document.addEventListener("click",(e) => inst.resolve(e))
 
 
 console.log(`задание: Создать класс, который производит экземпляр со следующими свойствами:
